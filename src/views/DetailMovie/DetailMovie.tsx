@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { noPoster } from './../../components/MovieList/MovieList';
 import './DetailMovie.scss'
 import Header from "../../components/Header/Header";
@@ -8,7 +8,6 @@ import { IMovieDetail } from '../../models/IMovieList';
 
 const DetailMovie: React.FC = (): JSX.Element => {
 
-    const navigate = useNavigate();
     let { id } = useParams();
 
     const URL = 'https://image.tmdb.org/t/p/w400/';
@@ -36,8 +35,9 @@ const DetailMovie: React.FC = (): JSX.Element => {
             </div>
 
             <div className='movie-detail'>
-
-                <button className='go-back' onClick={() => navigate(-1)}> Go back </button>
+                <Link to={`/`}>
+                    <button className='go-back'> Go back </button>
+                </Link>
                 <div className='poster'>
                     <img src={!!movie?.poster_path ? `${URL}${movie.poster_path}` : `${noPoster}`} alt={movie?.title}></img>
                 </div>
