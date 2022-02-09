@@ -5,27 +5,19 @@ import './DetailMovie.scss'
 import Header from "../../components/Header/Header";
 import SubHeader from "../../components/SubHeader/SubHeader";
 import { IMovieDetail } from '../../models/IMovieList';
+import { getMovieById } from '../../api/getMovies'
 
 const DetailMovie: React.FC = (): JSX.Element => {
 
-    let { id } = useParams();
+    const { id = '0' } = useParams();
 
     const URL = 'https://image.tmdb.org/t/p/w400/';
     const [movie, setMovie] = useState<IMovieDetail>();
 
-    const getMovieById = async () => {
-        const url = `https://api.themoviedb.org/3/movie/${id}?api_key=f7cc4d429cde54acb717c8d20a5a4109`;
-        const response = await fetch(url);
-        const responseJson = await response.json();
-        if (responseJson) {
-            setMovie(responseJson);
-        }
-
-    }
-
     useEffect(() => {
-        getMovieById();
-    });
+        getMovieById(id)
+            .then(setMovie);
+    }, []);
 
     return (
         <>
@@ -56,7 +48,6 @@ const DetailMovie: React.FC = (): JSX.Element => {
                         <span>{movie?.status}</span>
                     </div>
                 </div>
-
             </div>
         </>
     )

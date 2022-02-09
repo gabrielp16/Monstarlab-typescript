@@ -6,30 +6,19 @@ import MovieList from "../../components/MovieList/MovieList";
 import Header from "../../components/Header/Header";
 import SubHeader from "../../components/SubHeader/SubHeader";
 import Searchbox from "../../components/Searchbox/Searchbox";
-import { IMovie } from '../../models/IMovieList'
+import { IMovie } from '../../models/IMovieList';
+import { getMovies } from '../../api/getMovies';
+import { randomCharacter } from '../../helpers/utils';
 
 const Home: React.FC = (): JSX.Element => {
-
-    const alphabet = "abcdefghijklmnopqrstuvwxyz"
-    const randomCharacter: string = alphabet[Math.floor(Math.random() * alphabet.length)]
 
     const [movies, setMovies] = useState<IMovie[]>([]);
     const [favorites, setFavorite] = useState<IMovie[]>([]);
     const [stringMovie, setSearch] = useState<string>(randomCharacter);
 
-    const getMovies = async (stringMovie: string) => {
-        if (stringMovie) {
-            const url = `https://api.themoviedb.org/3/search/movie?api_key=f7cc4d429cde54acb717c8d20a5a4109&query=${stringMovie}`;
-            const response = await fetch(url);
-            const responseJson = await response.json();
-            const results = responseJson.results;
-            const moviesResult = !results ? [] : results;
-            setMovies(moviesResult)
-        }
-    }
-
     useEffect(() => {
-        getMovies(stringMovie);
+        getMovies(stringMovie)
+            .then(setMovies);
     }, [stringMovie]);
 
     useEffect(() => {
@@ -63,7 +52,7 @@ const Home: React.FC = (): JSX.Element => {
         <div className="Home">
             <Header title='Monstar Lab' />
             <div className="wrap-menu">
-                <Searchbox value={stringMovie} setSearch={setSearch} />
+                <Searchbox setSearch={setSearch} />
                 <SubHeader title='Movies' />
             </div>
             <div className="movie-list">

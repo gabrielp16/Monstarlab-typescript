@@ -11,7 +11,7 @@ const MovieList: React.FC<IMovieList> = (props): JSX.Element => {
 
     const URL = 'https://image.tmdb.org/t/p/w200/';
     const NoMovies = 'No movies to show';
-    if (movies.length) {
+    if (movies?.length) {
         return (
             <>
                 {

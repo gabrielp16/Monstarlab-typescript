@@ -3,14 +3,13 @@ import './Searchbox.scss'
 import { ISearch } from '../../models/ISearch'
 
 const Searchbox: React.FC<ISearch> = (props): JSX.Element => {
-    const { value, setSearch } = props;
+    const { setSearch } = props;
 
     return (
         <div className="searchbox">
             <input
-                value={value}
                 placeholder="Search a movie"
-                onChange={(event) => setSearch(event.target.value)}
+                onChange={(event) => setSearch((event.target.value).trim())}
             ></input>
         </div>
     );
