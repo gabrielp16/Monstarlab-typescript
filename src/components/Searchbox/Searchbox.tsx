@@ -1,12 +1,8 @@
 import React from "react";
 import './Searchbox.scss'
+import { ISearch } from '../../models/ISearch'
 
-interface IProps {
-    value?: string;
-    setSearch: Function;
-}
-
-const Searchbox: React.FC<IProps> = (props): JSX.Element => {
+const Searchbox: React.FC<ISearch> = (props): JSX.Element => {
     const { value, setSearch } = props;
 
     return (

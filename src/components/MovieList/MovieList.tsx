@@ -2,24 +2,11 @@ import React from 'react';
 import NoPoster from './images/poster-not-available.png'
 import './MovieList.scss';
 import { Link } from "react-router-dom";
+import { IMovieList } from '../../models/IMovieList'
 
 export const noPoster = NoPoster;
 
-interface IProps {
-    Favorites: React.FC;
-    handleFavorites: Function;
-    movies: IMovie[];
-}
-
-export interface IMovie {
-    id: string;
-    vote_average: number;
-    poster_path?: string;
-    title?: string;
-    status?: string;
-}
-
-const MovieList: React.FC<IProps> = (props): JSX.Element => {
+const MovieList: React.FC<IMovieList> = (props): JSX.Element => {
     const { Favorites, movies } = props;
 
     const URL = 'https://image.tmdb.org/t/p/w200/';
@@ -32,7 +19,7 @@ const MovieList: React.FC<IProps> = (props): JSX.Element => {
                         (movie) => (
                             <div className='movie-card' id={movie.id} key={movie.id}>
                                 <span className='rate'>
-                                    {(Math.round(movie.vote_average * 100) / 100).toFixed(1)}
+                                    {(Math.round(Number(movie.vote_average) * 100) / 100).toFixed(1)}
                                 </span>
                                 <div className='layer' onClick={() => props.handleFavorites(movie)}>
                                     <Favorites />
@@ -49,7 +36,7 @@ const MovieList: React.FC<IProps> = (props): JSX.Element => {
     } else {
         return (
             <>
-                <p className='no-movies'>`${NoMovies}`</p>
+                <p className='no-movies'>{NoMovies}</p>
             </>
         )
     }

@@ -1,11 +1,8 @@
 import React from 'react';
 import './Header.scss';
+import { ITitle } from '../../models/ITitle';
 
-interface IProps {
-    title?: string;
-}
-
-const Header: React.FC<IProps> = (props): JSX.Element => {
+const Header: React.FC<ITitle> = (props): JSX.Element => {
     const { title = 'Movie title' } = props;
 
     return (

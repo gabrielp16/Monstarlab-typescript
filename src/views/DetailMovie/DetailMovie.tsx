@@ -4,14 +4,7 @@ import { noPoster } from './../../components/MovieList/MovieList';
 import './DetailMovie.scss'
 import Header from "../../components/Header/Header";
 import SubHeader from "../../components/SubHeader/SubHeader";
-
-interface IMovie {
-    poster_path?: string;
-    title?: string;
-    overview?: string;
-    vote_average?: string;
-    status?: string;
-}
+import { IMovieDetail } from '../../models/IMovieList';
 
 const DetailMovie: React.FC = (): JSX.Element => {
 
@@ -19,7 +12,7 @@ const DetailMovie: React.FC = (): JSX.Element => {
     let { id } = useParams();
 
     const URL = 'https://image.tmdb.org/t/p/w400/';
-    const [movie, setMovie] = useState<IMovie>();
+    const [movie, setMovie] = useState<IMovieDetail>();
 
     const getMovieById = async () => {
         const url = `https://api.themoviedb.org/3/movie/${id}?api_key=f7cc4d429cde54acb717c8d20a5a4109`;
@@ -67,9 +60,6 @@ const DetailMovie: React.FC = (): JSX.Element => {
             </div>
         </>
     )
-};
-
-DetailMovie.propTypes = {
 };
 
 export default DetailMovie;

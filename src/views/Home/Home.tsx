@@ -6,7 +6,7 @@ import MovieList from "../../components/MovieList/MovieList";
 import Header from "../../components/Header/Header";
 import SubHeader from "../../components/SubHeader/SubHeader";
 import Searchbox from "../../components/Searchbox/Searchbox";
-import { IMovie } from '../../components/MovieList/MovieList'
+import { IMovie } from '../../models/IMovieList'
 
 const Home: React.FC = (): JSX.Element => {
 
@@ -58,7 +58,6 @@ const Home: React.FC = (): JSX.Element => {
         setFavorite(favoriteList);
         saveToLocalStorage(favoriteList);
     };
-
 
     return (
         <div className="Home">
