@@ -1,19 +1,22 @@
 import React from 'react';
-import { useRoutes } from 'react-router-dom';
+import { BrowserRouter as Router, useRoutes } from 'react-router-dom';
 import Home from './views/Home/Home';
 import DetailMovie from './views/DetailMovie/DetailMovie';
 
-const App: React.FC = (): JSX.Element => {
-  const mainRoutes = {
-    path: '/',
-    element: <Home />,
-    children: [
-      { path: '/', element: <Home /> },
-      { path: 'movie/:id', element: <DetailMovie /> },
-    ],
-  };
-  const routing = useRoutes([mainRoutes]);
-  return <>{routing}</>;
-}
+const App: React.FC = () => {
+  const routes = useRoutes([
+    { path: '/', element: <Home /> },
+    { path: 'movie/:id', element: <DetailMovie /> },
+  ]);
+  return routes;
+};
 
-export default App;
+const AppWrapper = () => {
+  return (
+    <Router>
+      <App />
+    </Router>
+  );
+};
+
+export default AppWrapper;
